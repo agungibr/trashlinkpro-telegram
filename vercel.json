@@ -2,22 +2,27 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/index.ts",
+      "src": "dist/index.js",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": ["src/**"]
+        "includeFiles": ["dist/**", "package.json"]
       }
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "src/index.ts"
+      "dest": "dist/index.js"
     }
   ],
+  "functions": {
+    "dist/index.js": {
+      "maxDuration": 60
+    }
+  },
   "env": {
     "TELEGRAM_BOT_TOKEN": "@telegram_bot_token",
-    "DATABASE_URL": "@database_url",
+    "DATABASE_URL": "@database_url", 
     "TRASH_CAPACITY_HEIGHT": "100",
     "ALERT_THRESHOLD": "80",
     "CHECK_INTERVAL": "300000"
