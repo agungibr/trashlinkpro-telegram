@@ -1,25 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "dist/index.js",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["dist/**", "package.json"]
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "dist/index.js"
-    }
-  ],
-  "functions": {
-    "dist/index.js": {
-      "maxDuration": 60
-    }
-  },
   "env": {
     "TELEGRAM_BOT_TOKEN": "@telegram_bot_token",
     "DATABASE_URL": "@database_url", 
