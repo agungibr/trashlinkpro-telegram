@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  trashlinkpro-bot:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - DATABASE_URL=${DATABASE_URL}
+      - TRASH_CAPACITY_HEIGHT=${TRASH_CAPACITY_HEIGHT:-100}
+      - ALERT_THRESHOLD=${ALERT_THRESHOLD:-80}
+      - CHECK_INTERVAL=${CHECK_INTERVAL:-300000}
+      - NODE_ENV=production
+    env_file:
+      - .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
